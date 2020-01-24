@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+rpi-epd2in7 = {git = "https://github.com/elad661/rpi_epd2in7.git",editable = true,ref = "master"}
+requests = "*"
+pillow = "*"
+spidev = "*"
+rpi-gpio = "*"
+psutil = "*"
+cachetools = "*"
+
+[requires]
+python_version = "3.5"
