@@ -2,7 +2,7 @@ import textwrap
 
 from PIL import ImageFont
 
-CHARS_PER_LINE = 18
+CHARS_PER_LINE = 27
 
 FONT_SIZE = 20
 FONT_LOCATION = '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'
