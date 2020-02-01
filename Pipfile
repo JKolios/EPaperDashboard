@@ -6,11 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-rpi-epd2in7 = {git = "https://github.com/elad661/rpi_epd2in7.git",editable = true,ref = "master"}
+"rpi-epd2in7" = {git = "https://github.com/JKolios/rpi_epd2in7.git",editable = true,ref = "master"}
 requests = "*"
 pillow = "*"
 spidev = "*"
-rpi-gpio = "*"
+"RPi.GPIO" = "*"
 psutil = "*"
 cachetools = "*"
 
