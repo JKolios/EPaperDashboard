@@ -4,9 +4,9 @@ from json import JSONDecodeError
 from cachetools import cached, TTLCache
 
 DARKSKY_BASE_URL = "https://api.darksky.net"
-DARKSKY_API_KEY = os.environ['DARKSKY_API_KEY']  #'d41e1346a83f18cdd9023caa1c3a5d4d'
-LATITUDE = os.environ['LATITUDE'] #38.0230725
-LONGITUDE = os.environ['LONGITUDE'] #24.0061355
+DARKSKY_API_KEY = os.environ['DARKSKY_API_KEY']
+LATITUDE = os.environ['LATITUDE']
+LONGITUDE = os.environ['LONGITUDE']
 
 
 def current_weather():
