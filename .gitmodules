@@ -1,0 +1,3 @@
+[submodule "rpi_epd2in7"]
+	path = rpi_epd2in7
+	url = git@github.com:JKolios/rpi_epd2in7.git
