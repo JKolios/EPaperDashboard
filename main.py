@@ -1,83 +1,60 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 import time
-import traceback
 
-from rpi_epd2in7.epd import EPD, VERTICAL_MODE, HORIZONTAL_MODE
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
-from PIL import ImageChops
+from display import Display
 
-import psutil_metrics
-import darksky_weather
-from text_render import draw_paragraph, text_to_paragraph, seq_to_text
+import apis.psutil_metrics
+import apis.darksky_weather
 
+import RPi.GPIO as GPIO
+
+KEYPRESS_DELAY = 5000
+
+def handle_button_press(channel):
+    print("Pressed button on channel {0}".format(channel))
+    channel_page_mapping[channel]()
 
 def page_1():
-
-    HBlackimage = Image.new(
-        '1', (epd.height, epd.width), 255)
-
-    # Horizontal
-    print("Drawing")
-    drawblack = ImageDraw.Draw(HBlackimage)
-
-    current_h = 0
-
-    current_h = draw_paragraph(
-        drawblack, current_h, "CPU Usg:", seq_to_text(psutil_metrics.cpu_percentages()), line_width=39)
-
-    current_h = draw_paragraph(
-        drawblack, current_h, "Load Avg:", seq_to_text(psutil_metrics.load_averages()), line_width=39)
-
-    current_h = draw_paragraph(
-        drawblack, current_h, "CPU Temp:", str(psutil_metrics.cpu_temp()), line_width=39)
-
-    current_h = draw_paragraph(
-        drawblack, current_h, "Memory Usg:", str(psutil_metrics.memory_percentage()), line_width=39)
-
-    current_h = draw_paragraph(
-        drawblack, current_h, "Uptime:", str(psutil_metrics.uptime()), line_width=39)
-
-    return HBlackimage
-
+    display.draw_paragraph("Load Avg: " + apis.psutil_metrics.load_averages())
+    display.draw_paragraph("CPU Temp: " + str(apis.psutil_metrics.cpu_temp()))
+    display.draw_paragraph("Memory Usg: " + str(apis.psutil_metrics.memory_percentage()))
+    display.draw_paragraph("Uptime: " + str(apis.psutil_metrics.uptime()))
+    display.show()
 
 def page_2():
-    HBlackimage = Image.new(
-        '1', (epd.height, epd.width), 255)
+    display.draw_paragraph("Current Weather: " + apis.darksky_weather.current_weather())
+    display.draw_paragraph("Today: " + apis.darksky_weather.todays_forecast())
+    display.draw_paragraph("This Week: " + apis.darksky_weather.weekly_forecast())
+    display.show()
 
-    # Horizontal
-    print("Drawing")
-    drawblack = ImageDraw.Draw(HBlackimage)
-    current_h = 0
+def page_3():
+    display.draw_paragraph("Foo: " + "bar")
+    display.show()
 
-    current_h = draw_paragraph(
-        drawblack, current_h, "Current Weather:", darksky_weather.current_weather(), line_width=39)
+def page_4():
+    display.draw_paragraph("Bar: " + "Baz")
+    display.show()
+    
+channel_page_mapping = {
+    5: page_1,
+    6: page_2,
+    13: page_3,
+    19: page_4
+}
 
-    current_h = draw_paragraph(
-        drawblack, current_h, "Today:", darksky_weather.todays_forecast(), line_width=39)
+display = Display()
 
-    current_h = draw_paragraph(
-        drawblack, current_h, "This Week:", darksky_weather.weekly_forecast(), line_width=39)
+def main():
 
-    return HBlackimage
+    channel_list = [5, 6, 13, 19]
+    GPIO.setup(channel_list, GPIO.IN)
+    for channel in channel_list:
+        GPIO.add_event_detect(channel, GPIO.RISING, bouncetime=KEYPRESS_DELAY, callback=handle_button_press)
+    while True:
+        time.sleep(10)
 
+    GPIO.cleanup()
 
-try:
-    epd = EPD(mode=VERTICAL_MODE)
-    epd.init()
-
-    page_1_image = page_1().rotate(90, expand=True)
-    page_1_image.save("page1.jpg", "JPEG")
-    epd.smart_update(page_1_image)
-
-    page_2_image = page_2().rotate(90, expand=True)
-    page_2_image.save("page2.jpg", "JPEG")
-    epd.smart_update(page_2_image)
-
-    epd.sleep()
-
-except:
-    print('traceback.format_exc():\n%s', traceback.format_exc())
-    exit()
+if __name__ == '__main__':
+    main()
