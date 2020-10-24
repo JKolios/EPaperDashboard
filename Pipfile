@@ -13,6 +13,7 @@ spidev = "*"
 "RPi.GPIO" = "*"
 psutil = "*"
 cachetools = "*"
+kubernetes = "*"
 
 [requires]
 python_version = "3.5"
