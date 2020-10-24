@@ -34,10 +34,10 @@ import time
 import io
 
 import spidev
-from .lut import LUT, QuickLUT
+from lut import LUT, QuickLUT
 import RPi.GPIO as GPIO
 from PIL import ImageChops, Image
-import ipdb
+#import ipdb
 
 # Pin definition
 RST_PIN = 17
