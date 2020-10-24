@@ -15,8 +15,8 @@ def main():
     display.draw_paragraph("CLUSTER STATUS")
     for node in kubeclient.list_all_nodes():
         display.draw_paragraph(
-            "Node {node.name}, {node.addresses}".format(node=node))
-
+            "Node {node[name]}, {node[addresses]}".format(node=node))
+    display.show()
 
 if __name__ == '__main__':
     main()
