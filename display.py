@@ -1,4 +1,4 @@
-from rpi_epd2in7.epd import EPD
+from epd import EPD
 from text_render.text_render import draw_paragraph
 
 from PIL import Image, ImageFont, ImageDraw, ImageChops

@@ -7,7 +7,6 @@ verify_ssl = true
 "ipdb" = "*"
 
 [packages]
-rpi-epd2in7 = {git = "https://github.com/JKolios/rpi_epd2in7.git",editable = true,ref = "master"}
 requests = "*"
 pillow = "*"
 spidev = "*"
