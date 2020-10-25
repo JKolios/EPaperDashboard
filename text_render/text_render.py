@@ -2,16 +2,16 @@ import textwrap
 
 from PIL import ImageFont
 
-CHARS_PER_LINE = 64
+CHARS_PER_LINE = 30
 
-FONT_SIZE = 18
+FONT_SIZE = 12
 FONT_LOCATION = './text_render/wqy-microhei.ttc'
 FONT = ImageFont.truetype(FONT_LOCATION, FONT_SIZE)
 
 TEXT_COLOR = 0
 
 
-def draw_paragraph(image, start_height, text, font=FONT, text_color=TEXT_COLOR, line_width=CHARS_PER_LINE, line_padding=2):
+def draw_paragraph(image, start_height, text, font=FONT, text_color=TEXT_COLOR, line_width=CHARS_PER_LINE, line_padding=1):
     current_height = start_height
     paragraph = text_to_paragraph(text, line_width)
     for line in paragraph:

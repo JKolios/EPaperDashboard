@@ -5,7 +5,7 @@ from PIL import Image, ImageFont, ImageDraw, ImageChops
 
 
 class Display:
-    def __init__(self, line_width=20):
+    def __init__(self, line_width=30):
         self.line_width = line_width
         self._epd = EPD()
         self._epd.init()
