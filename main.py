@@ -17,6 +17,7 @@ def main():
         display.draw_paragraph(
             "Node {node[name]}, {node[addresses]}".format(node=node))
     display.show()
+    display.sleep()
 
 if __name__ == '__main__':
     main()

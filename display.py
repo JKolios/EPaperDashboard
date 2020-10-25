@@ -1,14 +1,11 @@
-from epd import EPD
+from epd2in7 import EPD, EPD_WIDTH, EPD_HEIGHT
 from text_render.text_render import draw_paragraph
 
 from PIL import Image, ImageFont, ImageDraw, ImageChops
 
-VERTICAL_MODE = 0
-HORIZONTAL_MODE = 1
 
 class Display:
-    def __init__(self, mode=VERTICAL_MODE, line_width=20):
-        self.mode = mode
+    def __init__(self, line_width=20):
         self.line_width = line_width
         self._epd = EPD()
         self._epd.init()
@@ -26,14 +23,11 @@ class Display:
         self._sleep()
 
     def _update(self):
-        if self.mode == HORIZONTAL_MODE:
-            self._epd.smart_update(self._image.rotate(90, expand=True))
-            return
-        self._epd.smart_update(self._image)
+        self._epd.display_frame(self._epd.get_frame_buffer(self._image.rotate(180)))
 
     def _init_images(self):
         self.cursor_height = 0
-        self._image = Image.new('1', (self._epd.width, self._epd.height), 255)
+        self._image = Image.new('1', (EPD_WIDTH, EPD_HEIGHT), 255)
         self._image_draw = ImageDraw.Draw(self._image)
 
     def _sleep(self):
