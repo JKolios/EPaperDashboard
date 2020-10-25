@@ -3,7 +3,7 @@ import os
 import kubernetes
 
 
-def load_kubectl(kubeconfig_path=os.environ['KUBECTL_PATH']):
+def load_kubectl(kubeconfig_path=os.environ['KUBECONFIG']):
     kubernetes.config.load_kube_config(kubeconfig_path)
 
 

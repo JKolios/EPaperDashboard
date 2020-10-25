@@ -14,6 +14,7 @@ spidev = "*"
 psutil = "*"
 cachetools = "*"
 kubernetes = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.5"
