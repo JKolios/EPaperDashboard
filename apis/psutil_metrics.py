@@ -4,7 +4,7 @@ import time
 
 
 def cpu_temp():
-    return psutil.sensors_temperatures()['cpu-thermal'][0].current
+    return psutil.sensors_temperatures()['cpu_thermal'][0].current
 
 
 def cpu_percentages():
