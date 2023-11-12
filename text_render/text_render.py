@@ -15,9 +15,8 @@ def draw_paragraph(image, start_height, text, font=FONT, text_color=TEXT_COLOR, 
     current_height = start_height
     paragraph = text_to_paragraph(text, line_width)
     for line in paragraph:
-        _, string_height = image.textsize(line, font=font)
         image.text((0, current_height), line, fill=text_color, font=font)
-        current_height += (string_height + line_padding)
+        current_height += (FONT_SIZE + line_padding)
     return current_height
 
 
