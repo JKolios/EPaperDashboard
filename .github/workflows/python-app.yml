@@ -22,4 +22,4 @@ jobs:
         pipenv sync
     - name: Run Dashboard
       run: |
-        python main.py
+        pipenv run python main.py
