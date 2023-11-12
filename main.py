@@ -13,7 +13,7 @@ KEYPRESS_DELAY = 5000
 
 def handle_button_press(channel):
     print("Pressed button on channel {0}".format(channel))
-    channel_page_mapping[channel]()
+    CHANNEL_PAGE_MAPPING[channel]()
 
 def page_1():
     display.draw_paragraph("Load Avg: " + apis.psutil_metrics.load_averages())
@@ -35,8 +35,8 @@ def page_3():
 def page_4():
     display.draw_paragraph("Bar: " + "Baz")
     display.show()
-    
-channel_page_mapping = {
+
+CHANNEL_PAGE_MAPPING = {
     5: page_1,
     6: page_2,
     13: page_3,
