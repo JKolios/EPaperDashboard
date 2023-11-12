@@ -22,4 +22,5 @@ jobs:
         pipenv sync
     - name: Run Dashboard
       run: |
+        export PATH=$PATH:/home/pi/.local/bin
         pipenv run python main.py
