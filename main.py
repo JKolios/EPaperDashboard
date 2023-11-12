@@ -16,6 +16,7 @@ def handle_button_press(channel):
     CHANNEL_PAGE_MAPPING[channel]()
 
 def page_1():
+    print("Rendering page 1")
     display.draw_paragraph("Load Avg: " + apis.psutil_metrics.load_averages())
     display.draw_paragraph("CPU Temp: " + str(apis.psutil_metrics.cpu_temp()))
     display.draw_paragraph("Memory Usg: " + str(apis.psutil_metrics.memory_percentage()))
@@ -23,16 +24,21 @@ def page_1():
     display.show()
 
 def page_2():
+    print("Rendering page 2")
     display.draw_paragraph("Current Weather: " + apis.darksky_weather.current_weather())
     display.draw_paragraph("Today: " + apis.darksky_weather.todays_forecast())
     display.draw_paragraph("This Week: " + apis.darksky_weather.weekly_forecast())
     display.show()
 
 def page_3():
-    display.draw_paragraph("Foo: " + "bar")
+    print("Rendering page 3")
+    display.draw_paragraph("Weight Monitoring")
+    display.draw_paragraph("Last Measurement:")
+    display.draw_paragraph("Last Measurement:")
     display.show()
 
 def page_4():
+    print("Rendering page 4")
     display.draw_paragraph("Bar: " + "Baz")
     display.show()
 
@@ -46,11 +52,14 @@ CHANNEL_PAGE_MAPPING = {
 display = Display()
 
 def main():
-
+    print("Starting up")
     channel_list = [5, 6, 13, 19]
     GPIO.setup(channel_list, GPIO.IN)
     for channel in channel_list:
         GPIO.add_event_detect(channel, GPIO.RISING, bouncetime=KEYPRESS_DELAY, callback=handle_button_press)
+    print("GPIO event handlers added")
+    page_1()
+    print("Initial page shown")
     while True:
         time.sleep(10)
 
