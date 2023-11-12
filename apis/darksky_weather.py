@@ -3,10 +3,10 @@ import requests
 from json import JSONDecodeError
 from cachetools import cached, TTLCache
 
-DARKSKY_BASE_URL = os.environ.get('DARKSKY_BASE_URL', "https://api.pirateweather.net/")
+DARKSKY_BASE_URL = os.environ.get('DARKSKY_BASE_URL', 'https://api.pirateweather.net/')
 DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY', 'NO_API_KEY')
-LATITUDE = os.environ['LATITUDE']
-LONGITUDE = os.environ['LONGITUDE']
+LATITUDE = os.environ.get('LATITUDE', '0.00')
+LONGITUDE = os.environ.get('LONGITUDE', '0.00')
 
 
 def current_weather():
